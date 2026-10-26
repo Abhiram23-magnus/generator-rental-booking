@@ -1,0 +1,8 @@
+project_id = "generator-rental-booking"
+
+[api]
+schemas = ["public"]
+
+[functions.admin-upload-image]
+# The function checks the admin session token itself.
+verify_jwt = false

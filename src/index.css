@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1f2226;
+  --color-graphite: #2e3238;
+  --color-iron: #454a52;
+  --color-steel: #6b717a;
+  --color-line: #d5d9dd;
+  --color-concrete: #eceef0;
+  --color-paper: #ffffff;
+  --color-amber: #f2a20c;
+  --color-amber-soft: #fde7b8;
+  --color-amber-ink: #8a5a00;
+  --color-ok: #1e7a46;
+  --color-ok-soft: #dcf1e4;
+  --color-busy: #b3261e;
+  --color-busy-soft: #fbe3e1;
+  --color-hold: #6b4e00;
+  --color-hold-soft: #f6ecd2;
+
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-deva: "Tiro Devanagari Hindi", serif;
+
+  --radius-plate: 6px;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-concrete text-ink font-sans antialiased;
+    font-feature-settings: "tnum" 0;
+  }
+  :focus-visible { outline: 3px solid var(--color-amber); outline-offset: 2px; }
+  ::selection { background: var(--color-amber-soft); }
+}
+
+@utility font-wide { font-stretch: 125%; }
+@utility font-narrow { font-stretch: 75%; }
+@utility tabular { font-variant-numeric: tabular-nums; }
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-[4px] px-5 py-3 text-[15px] font-semibold
+    transition-colors disabled:cursor-not-allowed disabled:opacity-50 select-none;
+}
+@utility btn-amber { @apply btn bg-amber text-ink hover:bg-[#ffb52e] active:bg-[#e09400]; }
+@utility btn-ink { @apply btn bg-ink text-white hover:bg-graphite; }
+@utility btn-ghost { @apply btn border border-line bg-paper text-ink hover:border-steel; }
+@utility btn-ghost-dark { @apply btn border border-white/25 text-white hover:border-white/60; }
+@utility btn-danger { @apply btn bg-busy text-white hover:bg-[#962018]; }
+@utility btn-sm { @apply px-3 py-2 text-sm; }
+
+@utility field-label { @apply mb-1.5 block text-sm font-semibold text-ink; }
+@utility field-hint { @apply mt-1 text-[13px] text-steel; }
+@utility field-error { @apply mt-1 text-[13px] font-medium text-busy; }
+@utility input {
+  @apply w-full rounded-[4px] border border-line bg-paper px-3.5 py-3 text-[16px] text-ink
+    placeholder:text-steel/70 transition-colors focus:border-ink focus:outline-none
+    focus:ring-2 focus:ring-amber/60;
+  &[aria-invalid="true"] { border-color: var(--color-busy); }
+}
+@utility panel { @apply rounded-[6px] border border-line bg-paper; }
+
+@media print {
+  body { background: white; }
+  .no-print { display: none !important; }
+  .print-plain { box-shadow: none !important; border-color: #999 !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
